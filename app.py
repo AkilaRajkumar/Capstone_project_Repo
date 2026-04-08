@@ -5,12 +5,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-        hostname = socket.gethostname()
-            return f"Hello from Flask App running on {hostname}"
+    hostname = socket.gethostname()
+    return f"Hello from Flask App running on {hostname}"
 
-        @app.route('/health')
-        def health():
-                return {"status": "UP"}
+@app.route('/health')
+def health():
+    return {"status": "UP"}
 
-            if __name__ == "__main__":
-                    app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
