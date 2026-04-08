@@ -72,6 +72,23 @@ http://localhost:5000
 
 ---
 
+⚠️ Challenges Faced
+
+Docker container deployment issues
+Jenkins pipeline configuration errors
+Monitoring setup troubleshooting
+
+---
+
+📚 Learnings
+
+Hands-on experience with CI/CD pipelines
+Docker containerization and deployment
+Cloud hosting using AWS EC2
+Real-time monitoring using Prometheus and Grafana
+
+---
+
 ✅ Conclusion
 
 This project demonstrates how DevOps tools enable **automation, faster deployment, and scalability**.
