@@ -46,6 +46,14 @@ pipeline {
                 '''
             }
         }
+       stage('Test Application') {
+    steps {
+        sh '''
+        sleep 5
+        curl -f http://localhost:5000 || exit 1
+        '''
+    }
+} 
     }
 
     post {
