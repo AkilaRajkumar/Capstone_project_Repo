@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "akilaraamana/capstone_project:latest"
-        CONTAINER_NAME = "capstone_project"
         EC2_HOST = "13.234.238.147"
+        CONTAINER_NAME = "capstone_project"
     }
 
     stages {
@@ -39,15 +39,15 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['ec2-key']) {
-                    sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST "
-                    docker pull $DOCKER_IMAGE &&
-                    docker stop $CONTAINER_NAME || true &&
-                    docker rm $CONTAINER_NAME || true &&
-                    docker run -d -p 5000:5000 --name $CONTAINER_NAME $DOCKER_IMAGE
-                    "
-                    '''
+                sshagent(['new-kp']) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST '
+                    sudo docker pull $DOCKER_IMAGE &&
+                    sudo docker stop $CONTAINER_NAME || true &&
+                    sudo docker rm $CONTAINER_NAME || true &&
+                    sudo docker run -d -p 5000:5000 --name $CONTAINER_NAME $DOCKER_IMAGE
+                    '
+                    """
                 }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Waiting for app to start..."
-                sleep 10
+                sleep 20
                 curl -f http://$EC2_HOST:5000 || exit 1
                 '''
             }
